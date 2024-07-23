@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='/static/css/style.css'>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #c7f0e8,  #7fd1c1,#16a085, #7fd1c1, #c7f0e8);
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: space-between; /* Align content at top and bottom */
+            align-items: center;
+            min-height: 100vh; /* Ensure the body takes up at least the viewport height */
+        }
+
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            margin-top: 200px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] + label {
+            cursor: pointer;
+            padding: 10px 20px;
+            display: inline-block;
+            border-radius: 5px;
+            background-color: #16a085;
+            color: #fff;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="radio"]:checked + label {
+            background-color: #16a085;
+        }
+
+        button[type="submit"] {
+            background-color: #16a085;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        button[type="button"] {
+            background-color: #16a085;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button[type="submit"]:hover,
+        button[type="button"]:hover {
+            background-color: #16a085;
+        }
+
+        input[type="radio"] + label {
+            margin-right: 20px; /* Adjust the margin as needed */
+        }
+        input[type="radio"]:checked + label {
+            background-color: #16a085;
+        }
+
+        
+    </style>
+</head>
+<body>
+      <!-- Header Section Starts -->
+      <div class="header">
+        <a href="#" class="logo"><i class="fas fa-heartbeat"></i> medcare.</a>
+        <nav class="navbar">
+            <a href="#">home</a>
+            <a href="#">Patient_Registration</a>
+            <a href="#">about</a>
+            <a href="#">Contact_Us</a>
+        </nav>
+        <div id="menu-btn" class="fas fa-bars"></div>
+    </div>
+    <!-- Header Section End -->
+    
+    <div class="container">
+        <h1>Bed Allocation Results</h1>
+        <!-- Add the provided form here -->
+        <form action="{{ url_for('after_login_submit', patientid=patientid) }}" method="post">
+            <label for="addDetails">Do you want to modify existing details before allocation of bed?</label><br>
+            <input type="radio" id="yes" name="addDetails" value="yes">
+            <label for="yes">Yes</label><br>
+            <input type="radio" id="no" name="addDetails" value="no">
+            <label for="no">No</label><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+    <section class="footer" id="footer">
+        <div class="credit">created by <span style="font-weight: italic; color: rgba(55, 53, 53, 0.907);">22DCS005, 22DCS029, 22DCS039</span> | all right reserved</div>
+    </section>
+</body>
+</html>

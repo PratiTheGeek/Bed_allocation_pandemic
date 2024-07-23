@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href='/static/css/style.css'>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Change background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #c7f0e8,  #7fd1c1,#16a085, #7fd1c1, #c7f0e8);
+            position: relative; /* Needed for footer positioning */
+        }
+
+        .content {
+            text-align: center;
+            font-size: 24px; /* Adjust font size */
+            padding: 20px; /* Add padding */
+            border-radius: 20px; /* Add rounded corners */
+            background-color: #ffffff; /* Background color of the box */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Add shadow effect */
+            margin-bottom: 20px; /* Adjust margin bottom to make space for footer */
+        }
+
+        .footer {
+            
+            width: 100%; /* Take full width */
+            position: fixed; /* Fix it to the bottom */
+            bottom: 0; /* Stick it to the bottom */
+            left: 0; /* Align it to the left */
+        }
+
+        
+    </style>
+</head>
+<body>
+      <!-- Header Section Starts -->
+  <div class="header">
+    <a href="#" class="logo"><i class="fas fa-heartbeat"></i> medcare.</a>
+    <nav class="navbar">
+        <a href="#">home</a>
+        <a href="#">Patient_Registration</a>
+        <a href="#">about</a>
+        <a href="#">Contact_Us</a>
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+</div>
+<!-- Header Section End -->
+
+    <div class="content">
+        <p>for patientid: {{patientid}}</p>
+        <p>{{ans}}</p>
+    </div>
+
+    <!-- Footer section Starts  -->
+    <section class="footer" id="footer">
+        <div class="credit">created by <span style="font-weight: italic; color: rgba(55, 53, 53, 0.907);">22DCS005, 22DCS029, 22DCS039</span> | all right reserved</div>
+    </section>
+    <!-- Footer section End  -->
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href='/static/css/style.css'>
+  <!-- Page Icon -->
+  <link rel="shortcut icon" href="C:\Users\YASH\Desktop\pr1\final\templates\image\heartbeat-solid.svg" type="image/x-icon">
+  <style>
+
+body {
+      background: linear-gradient(to right, #c7f0e8,  #7fd1c1,#16a085, #7fd1c1, #c7f0e8);
+      font-family: Arial, sans-serif;
+    }
+    .login-container {
+      margin-top: 220px;
+      
+    }
+    .login-form {
+      background-color:rgba(252, 252, 252, 0.872);
+      padding: 20px;
+      justify-content: center;
+      border-radius: 25px;
+    }
+    .form-control {
+      margin-bottom: 20px;
+    }
+    .login-btn {
+      width: 100%;
+    }
+    .login-heading {
+      text-align: center;
+      color: #333;
+    }
+  </style>
+
+</head>
+<body>
+
+     <!-- Header Section Starts -->
+     <div class="header">
+      <a href="#" class="logo"><i class="fas fa-heartbeat"></i> medcare.</a>
+      <nav class="navbar">
+          <a href="#">home</a>
+          <a href="#">Patient_Registration</a>
+          <a href="#">about</a>
+          <a href="#">Contact_Us</a>
+      </nav>
+      <div id="menu-btn" class="fas fa-bars"></div>
+  </div>
+  <!-- Header Section End -->
+  <div class="container">
+    <div class="row justify-content-center login-container">
+      <div class="col-md-6">
+        <div class="login-form">
+          <h2 class="login-heading" style="color: black;">Patient Login</h2>
+
+<form action="/login" id="loginForm"  method="POST">
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+  </div>
+  <div class="form-group">
+    <label for="patientId">Patient ID:</label>
+    <input type="text" class="form-control" id="patientId" name="patientId" placeholder="Patient ID" required>
+  </div>
+  <button type="submit" class="btn btn-primary login-btn" value="Login">Login</button>
+</form>
+</div>
+</div>
+ </div>
+  </div>
+
+<!-- Footer section Starts  -->
+<section class="footer" id="footer">
+  <div class="box-container">
+      <div class="box">
+          
+      </div>
+      
+      <div class="box">
+         
+      </div>
+      <div class="box">
+         
+
+      </div>
+  </div>
+  <div class="credit">created by <span style="font-weight: italic; color: rgba(55, 53, 53, 0.907);">22DCS005, 22DCS029, 22DCS039</span> | all right reserved</div>
+
+</section>
+<!-- Footer section End  -->
+
+
+<script>
+    function validateForm() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var patientId = document.getElementById("patientId").value;
+
+        // You can add more complex validation if needed
+        if (email === "" || password === "" || patientId === "") {
+            alert("All fields must be filled out");
+            return false;
+        }
+
+        // Here you can add AJAX call to validate credentials on the server-side
+        // For now, I'll just show an alert
+        alert("Login successful!");
+        return true;
+    }
+</script>
+
+</body>
+</html>

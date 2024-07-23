@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bed Allocation</title>
+    <link rel="stylesheet" href='/static/css/style.css'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Set background color */
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: space-between; /* Align content at top and bottom */
+            align-items: center;
+            height: 100vh; /* Make the body take full viewport height */
+            margin: 0; /* Remove default margin */
+            background: linear-gradient(to right, #c7f0e8,  #7fd1c1,#16a085, #7fd1c1, #c7f0e8);
+            position: relative; /* Enable relative positioning for child elements */
+        }
+
+        .header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .container {
+            text-align: center; /* Center-align the content */
+            padding: 20px; /* Add padding */
+            background-color: #ffffff; /* Set background color for content */
+            border-radius: 10px; /* Add rounded corners */
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Add shadow effect */
+            margin-top: 200px; /* Adjust margin to create space between header and container */
+        }
+
+        h1 {
+            color: #333; /* Set title color */
+        }
+
+        p {
+            margin-bottom: 10px; /* Add space between paragraphs */
+        }
+
+        input[type="radio"] + label {
+            cursor: pointer;
+            padding: 10px 20px;
+            display: inline-block;
+            border-radius: 5px;
+            background-color: #16a085;
+            color: #fff;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="radio"]:checked + label {
+            background-color: #16a085;
+        }
+
+        button[type="submit"] {
+            background-color: #16a085;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        button[type="button"] { /* Apply styles to both buttons */
+            background-color: #16a085;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button[type="submit"]:hover,
+        button[type="button"]:hover { /* Apply hover effect to both buttons */
+            background-color: #16a085;
+        }
+
+        /* Add margin to the second button */
+        #downloadButton {
+            margin-left: 10px;
+        }
+
+        .footer {
+            text-align: center; /* Center-align the content */
+            width: 100%; /* Set footer width to 100% of body */
+            position: absolute; /* Make footer absolute relative to body */
+            bottom: 0; /* Position footer at the bottom */
+        }
+    </style>
+</head>
+<body>
+          <!-- Header Section Starts -->
+  <div class="header">
+    <a href="#" class="logo"><i class="fas fa-heartbeat"></i> medcare.</a>
+    <nav class="navbar">
+        <a href="#">home</a>
+        <a href="#">Patient_Registration</a>
+        <a href="#">about</a>
+        <a href="#">Contact_Us</a>
+    </nav>
+    <div id="menu-btn" class="fas fa-bars"></div>
+</div>
+<!-- Header Section End -->
+    <div class="container">
+        <h1>Bed Allocation Results</h1>
+        {% if patient_row %}
+            <p>Patient ID: {{ patientid }}</p>
+            <p>Advice: {{ Advice }}</p>
+            
+            <!-- Button for allocating beds (initially disabled) -->
+            <form id="allocateBedForm" action="{{ url_for('update', patientid=patientid) }}" method="post">
+                <button type="submit" id="allocateBedButton" disabled>Allocate Bed</button>
+            </form>
+            
+            <!-- Button for downloading CSV -->
+            <form id="downloadForm" action="{{ url_for('bedallocation', patientid=patientid) }}" method="post">
+                <input type="hidden" name="download_csv" value="1">
+                <button type="button" id="downloadButton">Download Hospital Suggestions (.csv)</button>
+            </form>
+        {% endif %}
+    </div>
+    <!-- Footer section Starts  -->
+    <section class="footer" id="footer">
+        <div class="credit">created by <span style="font-weight: italic; color: rgba(55, 53, 53, 0.907);">22DCS005, 22DCS029, 22DCS039</span> | all right reserved</div>
+    </section>
+    <!-- Footer section End  -->
+</body>
+
+<script>
+    document.getElementById("downloadButton").addEventListener("click", function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/bedallocation/{{ patientid }}', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({ download_csv: true }));
+        
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var blob = new Blob([xhr.response], { type: 'text/csv' });
+                    var url = window.URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'hospital_suggestions.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                    // Enable the "Allocate Bed" button after download
+                    document.getElementById("allocateBedButton").disabled = false;
+                } else {
+                    console.error('Error:', xhr.status);
+                }
+            }
+        };
+    });
+
+    // Add event listener to the "Allocate Bed" button for redirection
+    document.getElementById("allocateBedForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+        window.location.href = "{{ url_for('update',patientid=patientid) }}"; // Redirect to new URL
+    });
+</script>
+</html>
